@@ -22,14 +22,7 @@ import nodomain.freeyourgadget.gadgetbridge.database.DBHandler;
 import nodomain.freeyourgadget.gadgetbridge.database.DBHelper;
 import nodomain.freeyourgadget.gadgetbridge.devices.DeviceCoordinator;
 import nodomain.freeyourgadget.gadgetbridge.devices.UnknownDeviceCoordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.hplus.HPlusCoordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.hplus.MakibesF68Coordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.liveview.LiveviewCoordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.miband.MiBand2Coordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.miband.MiBandConst;
-import nodomain.freeyourgadget.gadgetbridge.devices.miband.MiBandCoordinator;
 import nodomain.freeyourgadget.gadgetbridge.devices.pebble.PebbleCoordinator;
-import nodomain.freeyourgadget.gadgetbridge.devices.vibratissimo.VibratissimoCoordinator;
 import nodomain.freeyourgadget.gadgetbridge.entities.Device;
 import nodomain.freeyourgadget.gadgetbridge.entities.DeviceAttributes;
 import nodomain.freeyourgadget.gadgetbridge.impl.GBDevice;
@@ -107,11 +100,6 @@ public class DeviceHelper {
         }
 
         Prefs prefs = GBApplication.getPrefs();
-        String miAddr = prefs.getString(MiBandConst.PREF_MIBAND_ADDRESS, "");
-        if (miAddr.length() > 0) {
-            GBDevice miDevice = new GBDevice(miAddr, "MI", DeviceType.MIBAND);
-            availableDevices.add(miDevice);
-        }
 
         String pebbleEmuAddr = prefs.getString("pebble_emu_addr", "");
         String pebbleEmuPort = prefs.getString("pebble_emu_port", "");
@@ -167,14 +155,7 @@ public class DeviceHelper {
 
     private List<DeviceCoordinator> createCoordinators() {
         List<DeviceCoordinator> result = new ArrayList<>();
-        result.add(new MiBand2Coordinator()); // Note: MiBand2 must come before MiBand because detection is hacky, atm
-        result.add(new MiBandCoordinator());
         result.add(new PebbleCoordinator());
-        result.add(new VibratissimoCoordinator());
-        result.add(new LiveviewCoordinator());
-        result.add(new HPlusCoordinator());
-        result.add(new MakibesF68Coordinator());
-
         return result;
     }
 

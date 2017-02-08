@@ -30,7 +30,6 @@ import java.util.Locale;
 
 import nodomain.freeyourgadget.gadgetbridge.R;
 import nodomain.freeyourgadget.gadgetbridge.database.DBHandler;
-import nodomain.freeyourgadget.gadgetbridge.devices.miband.MiBandCoordinator;
 import nodomain.freeyourgadget.gadgetbridge.impl.GBDevice;
 import nodomain.freeyourgadget.gadgetbridge.model.ActivitySample;
 
@@ -140,7 +139,7 @@ public class WeekStepsChartFragment extends AbstractChartFragment {
         GBDevice device = getChartsHost().getDevice();
         if (device != null) {
             // TODO: eek, this is device specific!
-            mTargetSteps = MiBandCoordinator.getFitnessGoal(device.getAddress());
+            //mTargetSteps = MiBandCoordinator.getFitnessGoal(device.getAddress());
         }
 
         mTodayStepsChart = (PieChart) rootView.findViewById(R.id.todaystepschart);
